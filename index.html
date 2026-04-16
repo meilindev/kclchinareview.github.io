@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>KCL China Review | China Studies Society at King's College London</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fefcf5;
+            color: #1e1e1e;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --kcl-red: #9b1b30;
+            --china-gold: #d4af37;
+            --gold-light: #f5e7b2;
+            --dark-bg: #2c2c2c;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--china-gold);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        nav {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--kcl-red);
+        }
+
+        .logo span {
+            color: var(--china-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #333;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--kcl-red);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--kcl-red) 0%, #6e1223 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.25rem;
+            font-weight: 500;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .hero .gold-accent {
+            color: var(--china-gold);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--china-gold);
+            color: #1e1e1e;
+            padding: 0.75rem 1.8rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 2rem;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .btn:hover {
+            background: #c2a030;
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section-alt {
+            background: #faf7f0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--kcl-red);
+        }
+
+        .team-role {
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        .events-text {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--china-gold);
+        }
+
+        .events-text a {
+            color: var(--kcl-red);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .events-text a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .contact-item {
+            background: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: background 0.2s;
+        }
+
+        .contact-item:hover {
+            background: var(--gold-light);
+        }
+
+        footer {
+            background: var(--dark-bg);
+            color: #ccc;
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--china-gold);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                gap: 1rem;
+                justify-content: center;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <div class="logo">KCL China <span>Review</span></div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#publication">Publication</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="container">
+        <h1>KCL China <span class="gold-accent">Review</span></h1>
+        <div class="tagline">Bridging perspectives on China – from King's College London to the world.</div>
+        <a href="#publication" class="btn">Explore our publication →</a>
+    </div>
+</header>
+
+<section id="about">
+    <div class="container">
+        <h2>About the Society</h2>
+        <p style="font-size: 1.1rem; max-width: 800px;">The China Studies Society at King's College London brings together students and scholars passionate about understanding China – its history, politics, economy, culture, and global impact. We host lectures, cultural events, and networking opportunities, fostering critical dialogue about one of the world's most dynamic regions.</p>
+    </div>
+</section>
+
+<section id="publication" class="section-alt">
+    <div class="container">
+        <h2>KCL China Review</h2>
+        <p style="font-size: 1.1rem; max-width: 800px;">The <strong>KCL China Review</strong> is the society's flagship academic publication. It features student-written essays, research articles, opinion pieces, and cultural commentaries on China-related topics. Published termly, it aims to amplify student voices and encourage rigorous, thoughtful analysis.</p>
+        <div style="margin-top: 2rem; background: white; padding: 1.5rem; border-radius: 16px; max-width: 600px;">
+            <p style="font-weight: 600;">✍️ Call for submissions</p>
+            <p>Open to all KCL students. Submit your writing on any China-related theme – politics, philosophy, business, art, or personal reflections.</p>
+            <a href="#contact" style="color: var(--kcl-red); font-weight: 500; display: inline-block; margin-top: 0.5rem;">Contact us to submit →</a>
+        </div>
+    </div>
+</section>
+
+<section id="team">
+    <div class="container">
+        <h2>Our Team</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-name">Mariam Benamer</div>
+                <div class="team-role">President & Editor-in-Chief</div>
+            </div>
+            <div class="team-card">
+                <div class="team-name">Raphaël Maurer</div>
+                <div class="team-role">Treasurer</div>
+            </div>
+            <div class="team-card">
+                <div class="team-name">Ziyang Ge & Taihao Wang</div>
+                <div class="team-role">Events Coordinators</div>
+            </div>
+        </div>
+        <p style="margin-top: 1rem; text-align: center; color: #666;">Interested in joining the team? <a href="#contact" style="color: var(--kcl-red);">Get in touch →</a></p>
+    </div>
+</section>
+
+<section id="events" class="section-alt">
+    <div class="container">
+        <h2>Upcoming Events</h2>
+        <div class="events-text">
+            <p>✨ Keep updated through our Instagram <a href="https://instagram.com/KCLChinaStudies" target="_blank" rel="noopener noreferrer">@KCLChinaStudies</a>. Embassy talks, academic discussions, hot pot nights, and more to come…</p>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="container">
+        <h2>Contact & Connect</h2>
+        <div class="contact-info">
+            <a href="mailto:kclcss@outlook.com" class="contact-item">📧 kclcss@outlook.com</a>
+            <a href="https://instagram.com/KCLChinaStudies" target="_blank" rel="noopener noreferrer" class="contact-item">📸 Society: @KCLChinaStudies</a>
+            <a href="https://instagram.com/KCLChinaReview" target="_blank" rel="noopener noreferrer" class="contact-item">📖 Publication: @KCLChinaReview</a>
+            <a href="https://www.linkedin.com/company/the-kcl-china-studies-society/" target="_blank" rel="noopener noreferrer" class="contact-item">💼 LinkedIn</a>
+        </div>
+        <p style="margin-top: 1rem;">For submissions, collaborations, or general inquiries, email us directly or reach out on Instagram.</p>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>© 2025 KCL China Review | China Studies Society, King's College London</p>
+        <p style="margin-top: 0.5rem;"><a href="#">Back to top ↑</a></p>
+    </div>
+</footer>
+
+</body>
+</html>
