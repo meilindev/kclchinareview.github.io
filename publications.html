@@ -36,23 +36,6 @@
             margin-bottom: 0.5rem;
         }
 
-        h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--china-gold);
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -119,13 +102,42 @@
             opacity: 0.9;
         }
 
-        /* Filter & Sort Controls - new styles */
+        /* Filter & Sort Controls */
         .filter-bar {
             background: white;
             padding: 1.5rem;
             border-radius: 16px;
             margin: 2rem 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cat-btn {
+            background: #f0f0f0;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .cat-btn.active {
+            background: var(--china-gold);
+            color: #1e1e1e;
+            font-weight: 600;
+        }
+
+        .sort-search {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
@@ -136,7 +148,6 @@
         .filter-group {
             display: flex;
             gap: 0.5rem;
-            flex-wrap: wrap;
             align-items: center;
         }
 
@@ -200,6 +211,16 @@
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: var(--gold-light);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--kcl-red);
         }
 
         .article-excerpt {
@@ -267,7 +288,7 @@
             h1 {
                 font-size: 1.8rem;
             }
-            .filter-bar {
+            .sort-search {
                 flex-direction: column;
                 align-items: stretch;
             }
@@ -300,18 +321,23 @@
 </header>
 
 <div class="container">
-    <!-- Filter and Sort Controls -->
+    <!-- Filter & Sort Controls -->
     <div class="filter-bar">
-        <div class="filter-group">
-            <label>Sort by:</label>
-            <select id="sort-select">
-                <option value="newest">Newest First</option>
-                <option value="oldest">Oldest First</option>
-                <option value="author">Author A-Z</option>
-            </select>
+        <div class="category-buttons" id="category-buttons">
+            <!-- Buttons will be added by JavaScript -->
         </div>
-        <div class="search-box">
-            <input type="text" id="search-input" placeholder="Search by title or author...">
+        <div class="sort-search">
+            <div class="filter-group">
+                <label>Sort by:</label>
+                <select id="sort-select">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="author">Author A-Z</option>
+                </select>
+            </div>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search by title or author...">
+            </div>
         </div>
     </div>
 
@@ -331,25 +357,31 @@
 </footer>
 
 <script>
-    // Article data (extracted from your existing HTML)
+    // Article data with categories
     const articlesData = [
         {
             title: "Winning the Consumer AI Promotion War",
             author: "Mariam Benamer",
-            date: "2026-02-25",  // YYYY-MM-DD for sorting
+            date: "2026-02-25",
+            category: "Technology",
             excerpt: "How Doubao reshaped China's LLM race, beyond technical spec, and instead into real people and real usage.",
             link: "article-ai-war.html"
         },
         {
-            title: "Should stop Xi Jinping going on about national humiliation?",
+            title: "Should stop going on about national humiliation?",
             author: "Hannah Zou",
             date: "2026-02-27",
-            excerpt: "Exploring whether the PRC President Xi Jinping should continue wielding the national humiliation narrative and assesses how useful it is for himself, the party, and the country.",
+            category: "History",
+            excerpt: "Exploring whether should continue wielding the national humiliation narrative and assesses how useful it is for himself, the party, and the country.",
             link: "article-humiliation.html"
         }
     ];
 
-    // Helper: escape HTML to prevent injection
+    // Define available categories (order matters for display)
+    const categories = ["All", "Politics", "Economy", "Culture", "Travel", "History", "Technology", "Environment"];
+
+    let activeCategory = "All";
+
     function escapeHtml(str) {
         return str.replace(/[&<>]/g, function(m) {
             if (m === '&') return '&amp;';
@@ -359,9 +391,29 @@
         });
     }
 
-    // Render articles based on current filters and sort
+    function renderCategoryButtons() {
+        const container = document.getElementById('category-buttons');
+        container.innerHTML = categories.map(cat => `
+            <button class="cat-btn ${cat === activeCategory ? 'active' : ''}" data-category="${cat}">${escapeHtml(cat)}</button>
+        `).join('');
+        
+        // Attach event listeners
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                activeCategory = btn.dataset.category;
+                renderCategoryButtons();
+                renderArticles();
+            });
+        });
+    }
+
     function renderArticles() {
         let filtered = [...articlesData];
+        
+        // Filter by category
+        if (activeCategory !== "All") {
+            filtered = filtered.filter(article => article.category === activeCategory);
+        }
         
         // Search filter
         const searchTerm = document.getElementById('search-input').value.toLowerCase();
@@ -382,10 +434,9 @@
             filtered.sort((a, b) => a.author.localeCompare(b.author));
         }
         
-        // Generate HTML
         const grid = document.getElementById('articles-grid');
         if (filtered.length === 0) {
-            grid.innerHTML = '<p style="text-align:center; grid-column:1/-1; padding: 3rem;">No articles found. Try adjusting your search.</p>';
+            grid.innerHTML = '<p style="text-align:center; grid-column:1/-1; padding: 3rem;">No articles found. Try adjusting filters.</p>';
             return;
         }
         
@@ -396,6 +447,7 @@
                     <div class="article-meta">
                         <span>${escapeHtml(article.date.split('-').reverse().join('/'))}</span>
                         <span>By ${escapeHtml(article.author)}</span>
+                        <span class="article-category">${escapeHtml(article.category)}</span>
                     </div>
                     <div class="article-excerpt">${escapeHtml(article.excerpt)}</div>
                     <a href="${escapeHtml(article.link)}" class="read-more">Read more →</a>
@@ -404,8 +456,9 @@
         `).join('');
     }
 
-    // Event listeners
+    // Initial render
     document.addEventListener('DOMContentLoaded', () => {
+        renderCategoryButtons();
         renderArticles();
         
         document.getElementById('sort-select').addEventListener('change', renderArticles);
