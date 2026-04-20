@@ -119,11 +119,54 @@
             opacity: 0.9;
         }
 
+        /* Filter & Sort Controls - new styles */
+        .filter-bar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: var(--kcl-red);
+        }
+
+        select, input {
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            border: 1px solid #ddd;
+            font-family: 'Montserrat', sans-serif;
+            background: white;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .search-box input {
+            width: 100%;
+        }
+
         .articles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 2rem;
-            padding: 3rem 0;
+            padding: 1rem 0 3rem 0;
         }
 
         .article-card {
@@ -224,6 +267,10 @@
             h1 {
                 font-size: 1.8rem;
             }
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
             .articles-grid {
                 grid-template-columns: 1fr;
             }
@@ -253,35 +300,23 @@
 </header>
 
 <div class="container">
-    <div class="articles-grid">
-        
-        <!-- Article 1 -->
-        <div class="article-card">
-            <div class="article-content">
-                <div class="article-title">Winning the Consumer AI Promotion War</div>
-                <div class="article-meta">
-                    <span>25th February 2026</span>
-                    <span>By Mariam Benamer</span>
-                </div>
-                <div class="article-excerpt">How Doubao reshaped China's LLM race, beyond technical spec, and instead into real people and real usage.</div>
-                <a href="article-ai-war.html" class="read-more">Read more →</a>
-            </div>
+    <!-- Filter and Sort Controls -->
+    <div class="filter-bar">
+        <div class="filter-group">
+            <label>Sort by:</label>
+            <select id="sort-select">
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="author">Author A-Z</option>
+            </select>
         </div>
-
-        <!-- Article 2 -->
-        <div class="article-card">
-            <div class="article-content">
-                <div class="article-title">Should Xi Jinping stop going on about national humiliation?</div>
-                <div class="article-meta">
-                    <span>27th February 2026</span>
-                    <span>By Hannah Zou</span>
-                </div>
-                <div class="article-excerpt">Exploring whether the PRC President Xi Jinping should continue wielding the national humiliation narrative and assesses how useful it is for himself, the party, and the country.</div>
-                <a href="article-humiliation.html" class="read-more">Read more →</a>
-            </div>
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Search by title or author...">
         </div>
-
     </div>
+
+    <!-- Dynamic Articles Grid -->
+    <div id="articles-grid" class="articles-grid"></div>
 
     <div class="back-home">
         <a href="index.html">← Back to Home</a>
@@ -294,6 +329,89 @@
         <p style="margin-top: 0.5rem;"><a href="#">Back to top ↑</a></p>
     </div>
 </footer>
+
+<script>
+    // Article data (extracted from your existing HTML)
+    const articlesData = [
+        {
+            title: "Winning the Consumer AI Promotion War",
+            author: "Mariam Benamer",
+            date: "2026-02-25",  // YYYY-MM-DD for sorting
+            excerpt: "How Doubao reshaped China's LLM race, beyond technical spec, and instead into real people and real usage.",
+            link: "article-ai-war.html"
+        },
+        {
+            title: "Should stop going on about national humiliation?",
+            author: "Hannah Zou",
+            date: "2026-02-27",
+            excerpt: "Exploring whether should continue wielding the national humiliation narrative and assesses how useful it is for himself, the party, and the country.",
+            link: "article-humiliation.html"
+        }
+    ];
+
+    // Helper: escape HTML to prevent injection
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // Render articles based on current filters and sort
+    function renderArticles() {
+        let filtered = [...articlesData];
+        
+        // Search filter
+        const searchTerm = document.getElementById('search-input').value.toLowerCase();
+        if (searchTerm) {
+            filtered = filtered.filter(article => 
+                article.title.toLowerCase().includes(searchTerm) || 
+                article.author.toLowerCase().includes(searchTerm)
+            );
+        }
+        
+        // Sort
+        const sortBy = document.getElementById('sort-select').value;
+        if (sortBy === 'newest') {
+            filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+        } else if (sortBy === 'oldest') {
+            filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+        } else if (sortBy === 'author') {
+            filtered.sort((a, b) => a.author.localeCompare(b.author));
+        }
+        
+        // Generate HTML
+        const grid = document.getElementById('articles-grid');
+        if (filtered.length === 0) {
+            grid.innerHTML = '<p style="text-align:center; grid-column:1/-1; padding: 3rem;">No articles found. Try adjusting your search.</p>';
+            return;
+        }
+        
+        grid.innerHTML = filtered.map(article => `
+            <div class="article-card">
+                <div class="article-content">
+                    <div class="article-title">${escapeHtml(article.title)}</div>
+                    <div class="article-meta">
+                        <span>${escapeHtml(article.date.split('-').reverse().join('/'))}</span>
+                        <span>By ${escapeHtml(article.author)}</span>
+                    </div>
+                    <div class="article-excerpt">${escapeHtml(article.excerpt)}</div>
+                    <a href="${escapeHtml(article.link)}" class="read-more">Read more →</a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+        renderArticles();
+        
+        document.getElementById('sort-select').addEventListener('change', renderArticles);
+        document.getElementById('search-input').addEventListener('input', renderArticles);
+    });
+</script>
 
 </body>
 </html>
