@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How TCM Took Over Your Feed | KCL China Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fefcf5;
+            color: #1e1e1e;
+            line-height: 1.6;
+        }
+
+        :root {
+            --kcl-red: #9b1b30;
+            --china-gold: #d4af37;
+            --dark-bg: #2c2c2c;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        nav {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--kcl-red);
+        }
+
+        .logo span {
+            color: var(--china-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #333;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--kcl-red);
+        }
+
+        .article-header {
+            background: linear-gradient(135deg, var(--kcl-red) 0%, #6e1223 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .article-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-meta {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .article-content {
+            padding: 3rem 0;
+        }
+
+        .article-content h2 {
+            color: var(--kcl-red);
+            margin: 2rem 0 1rem;
+            font-size: 1.6rem;
+        }
+
+        .article-content h3 {
+            color: var(--kcl-red);
+            margin: 1.5rem 0 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1rem;
+        }
+
+        .article-content ul {
+            margin: 1rem 0 1.5rem 1.5rem;
+        }
+
+        .article-content ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .article-content table th {
+            background: var(--kcl-red);
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .article-content table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .article-content table tr:nth-child(even) {
+            background: #f9f7f0;
+        }
+
+        .article-content blockquote {
+            margin: 2rem 0;
+            padding: 1.5rem 2rem;
+            background: #faf7f0;
+            border-left: 5px solid var(--china-gold);
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .article-content blockquote p {
+            margin-bottom: 0;
+        }
+
+        .pull-quote {
+            color: var(--kcl-red);
+            font-size: 1.4rem;
+            font-weight: 600;
+            line-height: 1.4;
+            text-align: center;
+            margin: 2rem 0;
+            padding: 0 1rem;
+            font-style: italic;
+            letter-spacing: -0.3px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: var(--kcl-red);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .outro-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: #faf7f0;
+            border-radius: 20px;
+            text-align: center;
+            border-left: 5px solid var(--china-gold);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .outro-section h3 {
+            color: var(--kcl-red);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .outro-section p {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .btn-submit {
+            display: inline-block;
+            background: var(--china-gold);
+            color: #1e1e1e;
+            padding: 0.7rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: #c2a030;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: var(--dark-bg);
+            color: #ccc;
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                gap: 1rem;
+                justify-content: center;
+            }
+            .article-header h1 {
+                font-size: 1.8rem;
+            }
+            .article-content table {
+                font-size: 0.8rem;
+            }
+            .article-content table th,
+            .article-content table td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <div class="logo">KCL China <span>Review</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#team">Team</a></li>
+            <li><a href="publications.html">Publications</a></li>
+            <li><a href="submissions.html">Submissions</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="article-header">
+    <div class="container">
+        <h1>How TCM Took Over Your Feed: Inside the Viral Wellness Trend</h1>
+        <div class="article-meta">By [Author Name] | Autumn 2026</div>
+    </div>
+</header>
+
+<article class="article-content">
+    <div class="container">
+
+        <p>Scroll through TikTok or Instagram for five minutes, and you will see it. A white girl in Brooklyn boiling goji berries. A British influencer applying moxibustion patches. A Chinese American blogger explaining why you should drink hot water. Traditional Chinese Medicine has taken over social media, and Gen Z is driving the trend.</p>
+
+        <p>But this is not your grandmother's TCM. This is memes, lifestyle experiments, and viral aesthetics, repackaged for a generation raised on short form video.</p>
+
+        <div class="pull-quote">
+            "TCM is not just trending. It is everywhere."
+        </div>
+
+        <h2>The Numbers Are Staggering</h2>
+
+        <p>The data speaks for itself. On TikTok alone, <strong>#GuaSha has accumulated over 4.7 billion views</strong>, while acupuncture-related content has surpassed <strong>2 billion views</strong>. The #TCM tag hosts more than <strong>230,000 videos</strong>. One creator, <strong>Sherry Zhu</strong>, saw her video on "sipping hot water throughout the day" rack up over <strong>5.5 million views</strong>. Another, <strong>oldtown_acupuncturist</strong>, has built a following of over <strong>580,000 people</strong> through acupuncture demonstrations and TCM education.</p>
+
+        <p>These are not niche numbers. These are mainstream cultural moments.</p>
+
+        <p><strong>TCM is not just trending. It is everywhere.</strong></p>
+
+        <h2>The Three Engines Driving the Trend</h2>
+
+        <p>The online TCM boom is driven by three distinct types of content.</p>
+
+        <h3>1. "Chinamaxxing" Lifestyle Experiments</h3>
+
+        <p>Young Westerners are actively imitating Chinese daily habits. Boiling water. Wearing slippers indoors. Drinking warm beverages. Eating congee for breakfast.</p>
+
+        <p>The trend has a name: <strong>"Chinamaxxing."</strong> It is playful, self-aware, and surprisingly earnest.</p>
+
+        <p>Why do they do it? Partly curiosity. Partly frustration with their own healthcare systems. Partly a sense that there is something valuable in another way of living.</p>
+
+        <p>One video format is especially popular: <strong>"You met me at a very Chinese time of my life."</strong> Young people use this phrase to introduce their TCM journeys, framing it as a personal transformation rather than just a health trend.</p>
+
+        <h3>2. Young and Fun "Chinese Wellness"</h3>
+
+        <p>Traditional wellness practices are being reinvented for social media.</p>
+
+        <p>On Xiaohongshu (China's Instagram equivalent), simple posts like "TCM advice: boil apple water" can get over <strong>100,000 likes</strong>. AI generated videos of ancient physicians like Bian Que and Hua Tuo "come back to life" to give health tips, mixing humour with genuine advice. TCM night markets, where young people get free pulse diagnoses and acupuncture demos, have become weekend destinations in cities like Zhengzhou and Chengdu.</p>
+
+        <p>The formula is simple: take ancient wisdom, make it visual, add a touch of humour, and post it.</p>
+
+        <h3>3. The "Chinese Baddie" Aesthetic</h3>
+
+        <p>This is the visual side of the trend. Think dewy skin, minimalist makeup, elegant clothing, and a lifestyle that looks calm and put together.</p>
+
+        <p>Influencers like <strong>Sherry Zhu</strong> pioneered this aesthetic. Her video on hot water drinking got over <strong>5.5 million views</strong> and made her a face of the movement. The "Chinese Baddie" is not just about looks. It is about a whole way of being: disciplined, grounded, and in control of your health.</p>
+
+        <p>The aesthetic has spread far beyond Chinese creators. Non Chinese influencers now adopt the look and the practices, sometimes with genuine understanding, sometimes without.</p>
+
+        <h2>The Creators Driving the Conversation</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Creator</th>
+                    <th>Platform</th>
+                    <th>Content</th>
+                    <th>Following</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>@oldtown_acupuncturist</strong></td>
+                    <td>TikTok</td>
+                    <td>Acupuncture demos, TCM education</td>
+                    <td>580,000+</td>
+                </tr>
+                <tr>
+                    <td><strong>Sherry Zhu</strong></td>
+                    <td>TikTok/IG</td>
+                    <td>Hot water, Chinese Baddie aesthetic</td>
+                    <td>5.5M+ viral video</td>
+                </tr>
+                <tr>
+                    <td><strong>Zoey Xinyi Gong</strong></td>
+                    <td>TikTok/IG</td>
+                    <td>TCM + nutrition + cooking</td>
+                    <td>Cross-disciplinary expert</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>These creators are not just influencers. They are educators, translators, and cultural bridges. They explain concepts like qi, yin and yang, and meridians in ways that feel accessible, not academic.</p>
+
+        <p>Some are trained practitioners. Others are just enthusiasts. The quality varies. The engagement does not.</p>
+
+        <h2>From Trends to Products</h2>
+
+        <p>Social media buzz has translated into real revenue.</p>
+
+        <ul>
+            <li><strong>Nin Jiom Pei Pa Koa</strong> (cough syrup) generates <strong>635 million yuan</strong> in annual overseas sales.</li>
+            <li><strong>ULucky</strong> (moxibustion heating belt) hit a peak daily revenue of <strong>400,000 yuan</strong>.</li>
+            <li><strong>WTHN</strong>, a London-based TCM brand, secured <strong>$5 million</strong> in investment from LVMH.</li>
+        </ul>
+
+        <p>The commercialisation is massive. And it is growing.</p>
+
+        <h2>What Is Driving This?</h2>
+
+        <ul>
+            <li><strong>Trust collapse.</strong> The 2026 Edelman Trust Barometer shows record low confidence in healthcare systems. When the system fails you, you look elsewhere.</li>
+            <li><strong>Burnout.</strong> Deloitte found that <strong>46% of Gen Z</strong> feel stressed all or most of the time. TCM offers something modern wellness does not: a framework for slowing down.</li>
+            <li><strong>Curiosity.</strong> China is everywhere in the news, on TikTok, and in global culture. Young people are genuinely interested in understanding it, not just fearing it.</li>
+            <li><strong>Community.</strong> TCM content is not just consumption. It is conversation. People share their experiences, ask questions, and learn together. That is rare in the wellness space.</li>
+        </ul>
+
+        <h2>The Skeptics' View</h2>
+
+        <p>Not everyone is convinced.</p>
+
+        <ul>
+            <li><strong>"It is just consumerism."</strong> TCM themed cafes charge £6 for goji lattes. TCM bars sell "herbal cocktails" at premium prices. The same corporations that sold you fast fashion now sell you "ancient wisdom."</li>
+            <li><strong>"It is cultural appropriation."</strong> TCM is a complete philosophical system, not just a collection of products. Reducing it to "hot water and goji berries" risks stripping it of meaning.</li>
+            <li><strong>"The evidence is weak."</strong> A 2025 <em>Lancet</em> study found that only <strong>20%</strong> of TCM therapies have strong clinical evidence. For those who want science-based medicine, TCM feels like a step backward.</li>
+            <li><strong>"It is escapism."</strong> TCM offers balance, harmony, and tradition. But it can also be a fantasy, a way to avoid engaging with modern problems.</li>
+        </ul>
+
+        <h2>Why It Might Stick</h2>
+
+        <p>Despite the skepticism, TCM's online appeal has staying power.</p>
+
+        <ul>
+            <li><strong>It offers control.</strong> When healthcare feels impersonal and inaccessible, TCM puts power back in your hands. You can learn about your constitution. You can adjust your diet. You can practice qigong.</li>
+            <li><strong>It offers connection.</strong> To your body. To tradition. To a philosophy of living. In an age of loneliness, that is valuable.</li>
+            <li><strong>It does not require believing everything.</strong> A cup of ginger tea. Some attention to sleep. Stretches in the morning. You can take what works and leave the rest. That flexibility makes TCM accessible.</li>
+        </ul>
+
+        <h2>What Experts Say</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Expert</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Chen Xuguang</strong>, Peking University</td>
+                    <td>"TCM's appeal reflects cultural confidence and a search for holistic meaning."</td>
+                </tr>
+                <tr>
+                    <td><strong>Professor Lyu Peiwan</strong>, Henan TCM University</td>
+                    <td>"Young people are rediscovering traditions their parents abandoned. It is not just health. It is identity."</td>
+                </tr>
+                <tr>
+                    <td><strong>Dr. Sarah Wu</strong>, London-based TCM practitioner</td>
+                    <td>"This is a reaction to burnout culture. TCM says: slow down. That is radical and necessary."</td>
+                </tr>
+                <tr>
+                    <td><strong><em>The Lancet</em> Editorial</strong> (2025)</td>
+                    <td>"TCM integration with modern medicine could be a major opportunity or a major risk."</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Is It Here to Stay?</h2>
+
+        <p>The numbers suggest yes. <strong>83.7%</strong> of TCM consumers are under 35. The industry is growing at <strong>22%</strong> annually. TCM exports grew <strong>25%</strong> in 2025. TikTok content doubled. Registered practitioners increased <strong>15%</strong>. These are not signs of a flash in the pan. They are signs of a shift.</p>
+
+        <p>But the TCM that survives will not be the TCM of your grandparents. It will be adapted, hybridised, and integrated with modern healthcare. The core ideas will endure: holistic thinking, prevention over cure, personalised care, connection to nature.</p>
+
+        <p>Whether you call it TCM, holistic wellness, or just "trying to feel better," one thing is clear. <strong>Gen Z is done with being sick, stressed, and powerless.</strong> They are searching for something real. And for now, they are finding it online, one goji berry video at a time.</p>
+
+        <h2>Quick Summary</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Answer</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Is it just a trend?</td>
+                    <td>No. Consistent growth, global reach, and strong community engagement suggest otherwise.</td>
+                </tr>
+                <tr>
+                    <td>Why Gen Z?</td>
+                    <td>Trust collapse, burnout, curiosity about China, and search for community.</td>
+                </tr>
+                <tr>
+                    <td>Is it real wellness?</td>
+                    <td>For some yes, for others it is aesthetic. Quality varies widely.</td>
+                </tr>
+                <tr>
+                    <td>Is it marketing?</td>
+                    <td>Yes, heavily. Corporations are capitalising on the trend.</td>
+                </tr>
+                <tr>
+                    <td>Will it last?</td>
+                    <td>Yes, in adapted forms. Pure tradition will not survive unchanged.</td>
+                </tr>
+                <tr>
+                    <td>Biggest risk?</td>
+                    <td>Commercialisation and cultural appropriation could discredit the movement.</td>
+                </tr>
+                <tr>
+                    <td>Biggest strength?</td>
+                    <td>It offers what modern healthcare does not: connection, control, and a philosophy of living.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><em>This article is part of the King's China Studies Society Autumn 2026 series. Follow us on Instagram <strong>@KCLChinaStudies</strong> for events, discussions, and more conversations about China, culture, and the future.</em></p>
+
+        <!-- Outro Section (Call to Action) -->
+        <div class="outro-section">
+            <h3>✍️ Share Your Voice</h3>
+            <p>The KCL China Review welcomes submissions from all KCL students. Whether you're writing about politics, culture, economy, or history — we want to hear from you.</p>
+            <a href="mailto:kclcss@outlook.com?subject=Article%20Submission%20for%20KCL%20China%20Review" class="btn-submit">📧 Submit Your Article →</a>
+            <p style="font-size: 0.8rem; margin-top: 1rem; color: #888;">Questions? Reach us at <a href="mailto:kclcss@outlook.com" style="color: var(--kcl-red); text-decoration: none; font-weight: 500;">kclcss@outlook.com</a></p>
+        </div>
+
+        <a href="publications.html" class="back-link">← Back to Publications</a>
+
+    </div>
+</article>
+
+<footer>
+    <div class="container">
+        <p>© 2026 KCL China Review | China Studies Society, King's College London</p>
+    </div>
+</footer>
+
+</body>
+</html>
