@@ -262,31 +262,41 @@
             h2 {
                 font-size: 1.6rem;
             }
-          /* Bio toggle button */
-.bio-toggle {
-    display: inline-block;
-    margin-top: 0.5rem;
-    background: var(--china-gold);
-    color: #1e1e1e;
-    border: none;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
-    transition: background 0.2s;
+         /* Hide the checkbox */
+.bio-toggle-input {
+    display: none;
 }
 
-.bio-toggle:hover {
-    background: #c2a030;
+/* Toggle label (the arrow button) */
+.bio-toggle-label {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--kcl-red);
+    cursor: pointer;
+    transition: color 0.2s;
+    letter-spacing: 0.3px;
+}
+
+.bio-toggle-label:hover {
+    color: var(--china-gold);
+}
+
+/* Arrow icon */
+.bio-toggle-label .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    font-size: 0.7rem;
+    margin-right: 4px;
 }
 
 /* Bio text — hidden by default */
 .team-bio {
     display: none;
     margin-top: 0.75rem;
-    padding: 0.75rem;
+    padding: 0.75rem 1rem;
     background: #f9f7f0;
     border-radius: 8px;
     font-size: 0.85rem;
@@ -294,12 +304,18 @@
     color: #333;
     text-align: left;
     border-left: 3px solid var(--china-gold);
+    font-family: 'Montserrat', sans-serif;
 }
 
-/* Bio visible when open */
-.team-bio.open {
+/* Show bio when checkbox is checked */
+.bio-toggle-input:checked ~ .team-bio {
     display: block;
-}  
+}
+
+/* Rotate arrow when open */
+.bio-toggle-input:checked ~ .bio-toggle-label .arrow {
+    transform: rotate(180deg);
+}
         }
     </style>
 </head>
@@ -357,13 +373,17 @@
     <div class="team-name">Mariam Benamer</div>
     <div class="team-role">President & Editor-in-Chief</div>
     
-    <!-- Toggle Button -->
-    <button class="bio-toggle" onclick="toggleBio('mariam-bio')">▼ Read Bio</button>
+    <!-- Toggle (checkbox + label) -->
+    <input type="checkbox" id="mariam-bio-toggle" class="bio-toggle-input">
+    <label for="mariam-bio-toggle" class="bio-toggle-label">
+        <span class="arrow">▼</span> 
+    </label>
     
     <!-- Bio (hidden until clicked) -->
-    <div id="mariam-bio" class="team-bio">
+    <div class="team-bio">
         Mariam is a third-year Politics student at King's, specialising in China's political economy and soft power strategy. She has had the unique experience of travelling several areas of China's ethnic borderlands, having taken a gap year, following her semester exchange at the University of Hong Kong. Her journey explored layered local histories, minority community perspectives and grassroots development, exposing the divide between regional lived realities and oversimplified international narratives.
     </div>
+</div>
 </div>
             <div class="team-card">
                 <img src="images/raph.jpg" alt="Raphaël Maurer" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem;">
