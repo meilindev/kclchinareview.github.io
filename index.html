@@ -262,51 +262,44 @@
             h2 {
                 font-size: 1.6rem;
             }
-/* Tooltip container */
-.team-card {
-    position: relative;
-    cursor: help;
+          /* Bio toggle button */
+.bio-toggle {
+    display: inline-block;
+    margin-top: 0.5rem;
+    background: var(--china-gold);
+    color: #1e1e1e;
+    border: none;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    transition: background 0.2s;
 }
 
-/* Tooltip text — hidden by default */
-.team-card .tooltip-text {
-    visibility: hidden;
-    opacity: 0;
-    width: 260px;
-    background: #9b1b30;
-    color: white;
-    text-align: center;
-    padding: 0.75rem 1rem;
+.bio-toggle:hover {
+    background: #c2a030;
+}
+
+/* Bio text — hidden by default */
+.team-bio {
+    display: none;
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: #f9f7f0;
     border-radius: 8px;
-    font-size: 0.8rem;
-    line-height: 1.4;
-    position: absolute;
-    bottom: 110%;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: opacity 0.3s ease;
-    z-index: 10;
-    font-weight: 400;
-    pointer-events: none;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #333;
+    text-align: left;
+    border-left: 3px solid var(--china-gold);
 }
 
-/* Small arrow */
-.team-card .tooltip-text::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 6px solid transparent;
-    border-top-color: #9b1b30;
-}
-
-/* Show tooltip on hover */
-.team-card:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-}
-            
+/* Bio visible when open */
+.team-bio.open {
+    display: block;
+}  
         }
     </style>
 </head>
@@ -363,7 +356,14 @@
     <img src="images/Mariam.JPG" alt="Mariam Benamer" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem;">
     <div class="team-name">Mariam Benamer</div>
     <div class="team-role">President & Editor-in-Chief</div>
-    <span class="tooltip-text">Mariam is a third-year Politics student at King's, specialising in China's political economy and soft power strategy. She has had the unique experience of travelling several areas of China's ethnic borderlands, having taken a gap year, following her semester exchange at the University of Hong Kong. Her journey explored layered local histories, minority community perspectives and grassroots development, exposing the divide between regional lived realities and oversimplified international narratives.</span>
+    
+    <!-- Toggle Button -->
+    <button class="bio-toggle" onclick="toggleBio('mariam-bio')">▼ Read Bio</button>
+    
+    <!-- Bio (hidden until clicked) -->
+    <div id="mariam-bio" class="team-bio">
+        Mariam is a third-year Politics student at King's, specialising in China's political economy and soft power strategy. She has had the unique experience of travelling several areas of China's ethnic borderlands, having taken a gap year, following her semester exchange at the University of Hong Kong. Her journey explored layered local histories, minority community perspectives and grassroots development, exposing the divide between regional lived realities and oversimplified international narratives.
+    </div>
 </div>
             <div class="team-card">
                 <img src="images/raph.jpg" alt="Raphaël Maurer" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem;">
