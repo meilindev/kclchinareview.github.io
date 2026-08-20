@@ -76,6 +76,42 @@
             transition: transform 0.2s, background 0.2s;
         }
         .btn-submit:hover { background: #c2a030; transform: translateY(-2px); }
+
+        /* Author bio styles */
+        .author-tag {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.4rem 1rem;
+            background: var(--china-gold);
+            border-radius: 4px;
+        }
+        .author-tag span {
+            font-size: 0.7rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #1e1e1e;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .author-bio {
+            margin-top: 0.75rem;
+            padding: 1.5rem;
+            background: #faf7f0;
+            border-radius: 12px;
+            border-left: 4px solid var(--kcl-red);
+        }
+        .author-bio .name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--kcl-red);
+            margin-bottom: 0.25rem;
+        }
+        .author-bio .bio {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
         footer {
             background: var(--dark-bg);
             color: #ccc;
@@ -109,7 +145,7 @@
 <header class="article-header">
     <div class="container">
         <h1>Beyond "Made in China"</h1>
-        <div class="article-meta">By Catherine Omartins | Autumn 2026</div>
+        <div class="article-meta">By Catherine Osmartins | Autumn 2026</div>
     </div>
 </header>
 
@@ -306,10 +342,8 @@
 
         <p><em>This article is part of the King's China Studies Society Autumn 2026 series. Follow us on Instagram <strong>@KCLChinaStudies</strong> for events, discussions, and more conversations about China, culture, and the future.</em></p>
 
+        <!-- Outro Section -->
         <div class="outro-section">
-            
-<!-- Outro Section -->
-  <div class="outro-section">
             <h3>✍️ Share Your Voice</h3>
             <p>The KCL China Review welcomes submissions from all KCL students. Whether you're writing about politics, culture, economy, or history, we want to hear from you.</p>
             <a href="mailto:kclcss@outlook.com?subject=Article%20Submission%20for%20KCL%20China%20Review" class="btn-submit">📧 Submit Your Article →</a>
@@ -318,15 +352,17 @@
 
         <!-- External Contributor Tag -->
         <div class="author-tag">
-            <span>External Contributors</span>
+            <span>External Contributor</span>
         </div>
 
-        <!-- Author Bios -->
+        <!-- Catherine Osmartins Bio -->
         <div class="author-bio">
             <div class="name">Catherine Osmartins</div>
-            <div class="bio">Catherine Osmartins is a ...</div>
+            <div class="bio">Catherine Osmartins is a [brief description]. She writes about consumer economics, business culture, and everyday life in Chinese cities.</div>
+        </div>
 
         <a href="publications.html" class="back-link">← Back to Publications</a>
+
     </div>
 </article>
 
